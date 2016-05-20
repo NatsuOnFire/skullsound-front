@@ -8,7 +8,7 @@
  * Controller of the skullsoundApp
  */
 angular.module('skullsoundApp')
-  .controller('MainCtrl', function ($scope, $sce, Mp3) {
+  .controller('MainCtrl', function ($scope, $sce, $interval, Mp3) {
 
     $scope.songs = undefined;
     $scope.albumActif = undefined;
@@ -16,11 +16,23 @@ angular.module('skullsoundApp')
     $scope.audioPath = undefined;
     $scope.songName = undefined;
 
-    Mp3.getAlbums().success(function (albums) {
-      $scope.albums = albums;
-    }).error(function (err) {
-      console.log(err);
-    });
+    $interval(function() {
+      $scope.getAlbums();
+    },  5000);
+
+    $interval(function() {
+      if($scope.albumActif !== undefined){
+        $scope.getSongs($scope.albumActif);
+      }
+    }, 5000);
+
+    $scope.getAlbums = function(){
+      Mp3.getAlbums().success(function (albums) {
+        $scope.albums = albums;
+      }).error(function (err) {
+        console.log(err);
+      });
+    };
 
     $scope.getSongs = function (album) {
       Mp3.getSongsByAlbum(album).success(function (songs) {

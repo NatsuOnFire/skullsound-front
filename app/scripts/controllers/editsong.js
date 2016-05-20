@@ -21,7 +21,9 @@ angular.module('skullsoundApp')
 
     $scope.send = function () {
       Mp3.updateSong($scope.data).success(function(){
-        $scope.message = 'Musique modifiée';
+        Mp3.updateSongMetadata($scope.data).success(function(){
+          $location.path('/');
+        });
       }).error(function(err){
         console.log(err);
       });

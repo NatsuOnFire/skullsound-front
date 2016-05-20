@@ -27,13 +27,17 @@ angular.module('skullsoundApp')
       removeSongDatabase: function(id){
         return $http.delete(apiEndpoint + '/mp3/' + id);
       },
-      
+
       removeSongFile: function(id){
         return $http.delete(apiEndpoint + '/mp3/file/' + id);
       },
-      
+
       updateSong: function(song){
         return $http.put(apiEndpoint + '/mp3/' + song.id, song);
+      },
+
+      updateSongMetadata: function(song){
+        return $http.put(apiEndpoint + '/mp3/metadata/' + song.id, song);
       }
     };
   });
