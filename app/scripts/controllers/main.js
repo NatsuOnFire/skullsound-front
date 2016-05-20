@@ -14,6 +14,7 @@ angular.module('skullsoundApp')
     $scope.albumActif = undefined;
     $scope.audioSrc = undefined;
     $scope.audioPath = undefined;
+    $scope.songName = undefined;
 
     Mp3.getAlbums().success(function (albums) {
       $scope.albums = albums;
@@ -34,6 +35,7 @@ angular.module('skullsoundApp')
       var url = $sce.trustAsResourceUrl('http://localhost:1337/' + path);
       $scope.audioSrc = url;
       $scope.audioPath = path;
+      $scope.songName = path.split('/').pop();
     };
 
     $scope.removeSong = function (id) {

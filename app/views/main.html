@@ -10,7 +10,11 @@
       </ul>
     </div>
     <div class="col s9 songs">
-      <audio class="audioplayer" controls autoplay ng-src="{{audioSrc}}" ng-if="audioSrc !== undefined"/>
+      <div class="audioplayer">
+        <audio controls autoplay ng-src="{{audioSrc}}" ng-if="audioSrc !== undefined"/>
+        <marquee class="marque" direction="right">{{songName}}</marquee>
+      </div>
+
       <div class="songsList">
         <table ng-if="songs !== undefined">
           <tr>
@@ -21,17 +25,17 @@
             <th></th>
           </tr>
           <tr ng-repeat="song in songs | orderBy: 'title'" ng-click="playSong(song.path)" ng-class="audioPath === song.path ? 'activeSong' : ''">
-            <td>{{song.title}}</td>
-            <td>{{song.artist}}</td>
-            <td>{{song.genre}}</td>
-            <td>{{song.year}}</td>
-            <td>
-              <button class="btn blue lighten-3"><a ng-href="#/song/{{song.id}}">Edit</a></button>
-              <button class="btn blue lighten-3" style="color: red" ng-click="removeSong(song.id)">Supprimer</button>
+            <td class="song-td song-click">{{song.title}}</td>
+            <td class="song-td song-click">{{song.artist}}</td>
+            <td class="song-td song-click">{{song.genre}}</td>
+            <td class="song-td song-click">{{song.year}}</td>
+            <td class="song-td">
+              <button class="btn grey lighten-2 setting"><a ng-href="#/song/{{song.id}}"><i style="color:black" class="tiny material-icons">settings</i></a></button>
+              <button class="btn grey lighten-2 setting" ng-click="removeSong(song.id)">X</button>
             </td>
           </tr>
         </table>
-        <p ng-if="songs === undefined && albumActif === undefined">Aucun album sélectionné</p>
+        <p class="void" ng-if="songs === undefined && albumActif === undefined"><i class="large material-icons voidIcon">play_for_work</i>Aucun album sélectionné</p>
         <p ng-if="songs === undefined && albumActif !== undefined">Aucune musique trouvée</p>
       </div>
     </div>
