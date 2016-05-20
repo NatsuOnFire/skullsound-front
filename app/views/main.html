@@ -8,28 +8,31 @@
         </li>
       </ul>
     </div>
-    <div class="col s9 songs">
-      <table ng-if="songs !== undefined">
-        <tr>
-          <th>Titre</th>
-          <th>Artiste</th>
-          <th>Genre</th>
-          <th>Année</th>
-          <th></th>
-        </tr>
-        <tr ng-repeat="song in songs | orderBy: 'title'">
-          <td>{{song.title}}</td>
-          <td>{{song.artist}}</td>
-          <td>{{song.genre}}</td>
-          <td>{{song.year}}</td>
-          <td>
-            <button><a ng-href="#/song/{{song.id}}">Edit</a></button>
-            <button style="color: red" ng-click="removeSong(song.id, $index)">Supprimer</button>
-          </td>
-        </tr>
-      </table>
-      <p ng-if="songs === undefined && albumActif === undefined">Aucun album sélectionné</p>
-      <p ng-if="songs === undefined && albumActif !== undefined">Aucune musique trouvée</p>
+    <div class="col s9">
+      <audio class="audioplayer" controls autoplay ng-src="{{audioSrc}}" ng-if="audioSrc !== undefined"/>
+      <div class="songs">
+        <table ng-if="songs !== undefined">
+          <tr>
+            <th>Titre</th>
+            <th>Artiste</th>
+            <th>Genre</th>
+            <th>Année</th>
+            <th></th>
+          </tr>
+          <tr ng-repeat="song in songs | orderBy: 'title'" ng-click="playSong(song.path)" ng-class="audioPath === song.path ? 'activeSong' : ''">
+            <td>{{song.title}}</td>
+            <td>{{song.artist}}</td>
+            <td>{{song.genre}}</td>
+            <td>{{song.year}}</td>
+            <td>
+              <button class="btn blue lighten-3"><a ng-href="#/song/{{song.id}}">Edit</a></button>
+              <button class="btn blue lighten-3" style="color: red" ng-click="removeSong(song.id)">Supprimer</button>
+            </td>
+          </tr>
+        </table>
+        <p ng-if="songs === undefined && albumActif === undefined">Aucun album sélectionné</p>
+        <p ng-if="songs === undefined && albumActif !== undefined">Aucune musique trouvée</p>
+      </div>
     </div>
   </div>
 </div>

@@ -8,10 +8,12 @@
  * Controller of the skullsoundApp
  */
 angular.module('skullsoundApp')
-  .controller('MainCtrl', function ($scope, Mp3) {
+  .controller('MainCtrl', function ($scope, $sce, Mp3) {
 
     $scope.songs = undefined;
     $scope.albumActif = undefined;
+    $scope.audioSrc = undefined;
+    $scope.audioPath = undefined;
 
     Mp3.getAlbums().success(function (albums) {
       $scope.albums = albums;
@@ -28,10 +30,16 @@ angular.module('skullsoundApp')
       });
     };
 
-    $scope.removeSong = function (id, index) {
+    $scope.playSong = function(path){
+      var url = $sce.trustAsResourceUrl('http://localhost:1337/' + path);
+      $scope.audioSrc = url;
+      $scope.audioPath = path;
+    };
+
+    $scope.removeSong = function (id) {
       Mp3.removeSongFile(id).success(function () {
         Mp3.removeSongDatabase(id).success(function () {
-          $scope.songs.splice(index, 1);
+          $scope.getSongs($scope.albumActif);
         });
       });
     };
