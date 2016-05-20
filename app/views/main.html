@@ -1,23 +1,35 @@
-<div class="jumbotron">
-  <h1>'Allo, 'Allo!</h1>
-  <p class="lead">
-    <img src="images/yeoman.png" alt="I'm Yeoman"><br>
-    Always a pleasure scaffolding your apps.
-  </p>
-  <p><a class="btn btn-lg btn-success" ng-href="#/">Splendid!<span class="glyphicon glyphicon-ok"></span></a></p>
-</div>
-
-<div class="row marketing">
-  <h4>HTML5 Boilerplate</h4>
-  <p>
-    HTML5 Boilerplate is a professional front-end template for building fast, robust, and adaptable web apps or sites.
-  </p>
-
-  <h4>Angular</h4>
-  <p>
-    AngularJS is a toolset for building the framework most suited to your application development.
-  </p>
-
-  <h4>Karma</h4>
-  <p>Spectacular Test Runner for JavaScript.</p>
+<div class="container col s12">
+  <div class="row">
+    <div class="col s3 albums">
+      <p class="center" ng-if="albums.length === 0">Aucun album</p>
+      <ul ng-if="albums.length > 0">
+        <li ng-repeat="album in albums" ng-class="albumActif === album ? 'activeAlbum' : ''">
+          <a class="albumLink waves-effect" ng-click="getSongs(album)">{{album}}</a>
+        </li>
+      </ul>
+    </div>
+    <div class="col s9 songs">
+      <table ng-if="songs !== undefined">
+        <tr>
+          <th>Titre</th>
+          <th>Artiste</th>
+          <th>Genre</th>
+          <th>Année</th>
+          <th></th>
+        </tr>
+        <tr ng-repeat="song in songs | orderBy: 'title'">
+          <td>{{song.title}}</td>
+          <td>{{song.artist}}</td>
+          <td>{{song.genre}}</td>
+          <td>{{song.year}}</td>
+          <td>
+            <button><a ng-href="#/song/{{song.id}}">Edit</a></button>
+            <button style="color: red" ng-click="removeSong(song.id, $index)">Supprimer</button>
+          </td>
+        </tr>
+      </table>
+      <p ng-if="songs === undefined && albumActif === undefined">Aucun album sélectionné</p>
+      <p ng-if="songs === undefined && albumActif !== undefined">Aucune musique trouvée</p>
+    </div>
+  </div>
 </div>
