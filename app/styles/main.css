@@ -48,3 +48,8 @@ li.activeAlbum{
   overflow-y: auto;
   height: calc(100vh - 64px);
 }
+
+audio{
+  width: 100%;
+  margin-top: 10px;
+}
