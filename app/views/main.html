@@ -1,3 +1,4 @@
+<div class="app">
 <div class="container col s12">
   <div class="row">
     <div class="col s3 albums">
@@ -8,9 +9,9 @@
         </li>
       </ul>
     </div>
-    <div class="col s9">
+    <div class="col s9 songs">
       <audio class="audioplayer" controls autoplay ng-src="{{audioSrc}}" ng-if="audioSrc !== undefined"/>
-      <div class="songs">
+      <div class="songsList">
         <table ng-if="songs !== undefined">
           <tr>
             <th>Titre</th>
@@ -35,4 +36,5 @@
       </div>
     </div>
   </div>
+</div>
 </div>
