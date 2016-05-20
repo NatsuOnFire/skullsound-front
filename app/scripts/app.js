@@ -25,6 +25,11 @@ angular
         controller: 'MainCtrl',
         controllerAs: 'main'
       })
+      .when('/song/:id', {
+        templateUrl : 'views/edit.html',
+        controller: 'EditsongCtrl',
+        controllerAs: 'edit'
+      })
       .otherwise({
         redirectTo: '/'
       });

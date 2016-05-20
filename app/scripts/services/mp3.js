@@ -30,6 +30,10 @@ angular.module('skullsoundApp')
       
       removeSongFile: function(id){
         return $http.delete(apiEndpoint + '/mp3/file/' + id);
+      },
+      
+      updateSong: function(song){
+        return $http.put(apiEndpoint + '/mp3/' + song.id, song);
       }
     };
   });
